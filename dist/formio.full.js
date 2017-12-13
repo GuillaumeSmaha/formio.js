@@ -9351,6 +9351,8 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
     value: function build() {
       var _this2 = this;
 
+      _get(StripeCheckoutComponent.prototype.__proto__ || Object.getPrototypeOf(StripeCheckoutComponent.prototype), 'build', this).call(this);
+
       // Add a hidden input which will contain the payment token.
       this.inputHidden = (0, _cloneDeep3.default)(this.component);
       this.inputHidden.type = "hidden";
@@ -9368,8 +9370,6 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
         configuration.token = _this2.onToken;
 
         _this2.handler = StripeCheckout.configure(configuration);
-
-        _get(StripeCheckoutComponent.prototype.__proto__ || Object.getPrototypeOf(StripeCheckoutComponent.prototype), 'build', _this2).call(_this2);
 
         _this2.on('customEvent', _this2.onClickButton);
 

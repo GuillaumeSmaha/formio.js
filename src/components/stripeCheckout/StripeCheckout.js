@@ -27,6 +27,8 @@ export class StripeCheckoutComponent extends ButtonComponent {
   }
 
   build() {
+    super.build();
+
     // Add a hidden input which will contain the payment token.
     this.inputHidden = _cloneDeep(this.component);
     this.inputHidden.type = "hidden";
@@ -44,8 +46,6 @@ export class StripeCheckoutComponent extends ButtonComponent {
       configuration.token = this.onToken;
 
       this.handler = StripeCheckout.configure(configuration);
-
-      super.build();
 
       this.on('customEvent', this.onClickButton);
 
