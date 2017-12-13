@@ -9035,16 +9035,23 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       return _Base.BaseComponent.prototype.setValue.apply(this, arguments);
     }
   }, {
-    key: 'paymentError',
-    value: function paymentError(result) {
-      if (result) {
+    key: 'paymentDisplayError',
+    value: function paymentDisplayError(result) {
+      if (result.error) {
         // Inform the user if there was an error
-        var stripeElementErrorBlock = that.ce('p', {
+        var stripeElementErrorBlock = this.ce('p', {
           class: "help-block"
         }, result.error.message);
-        that.stripeElementError.innerHTML = '';
-        that.stripeElementError.appendChild(stripeElementErrorBlock);
+        this.stripeElementError.innerHTML = '';
+        this.stripeElementError.appendChild(stripeElementErrorBlock);
+      } else {
+        this.stripeElementError.innerHTML = '';
       }
+    }
+  }, {
+    key: 'paymentError',
+    value: function paymentError(result) {
+      this.paymentDisplayError(result);
       this.removeClass(this.element, 'stripe-submitting');
       this.addClass(this.element, 'stripe-submit-error');
       this.removeClass(this.element, 'stripe-submitted');
@@ -9066,7 +9073,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
     key: 'paymentDone',
     value: function paymentDone(result) {
       // Store token in hidden input
-      that.inputHiddenComponent.setValue(result.token.id);
+      this.inputHiddenComponent.setValue(result.token.id);
 
       this.removeClass(this.element, 'stripe-submit-error');
       this.removeClass(this.element, 'stripe-submitting');
@@ -9154,17 +9161,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
         card.mount(_this2.stripeElementCard);
 
         // Handle real-time validation errors from the card Element.
-        _this2.addEventListener(card, 'change', function (event) {
-          if (event.error) {
-            var stripeElementErrorBlock = _this2.ce('p', {
-              class: "help-block"
-            }, event.error.message);
-            _this2.stripeElementError.innerHTML = '';
-            _this2.stripeElementError.appendChild(stripeElementErrorBlock);
-          } else {
-            _this2.stripeElementError.innerHTML = '';
-          }
-        });
+        _this2.addEventListener(card, 'change', _this2.paymentDisplayError);
 
         // Handle button submission
         _this2.addEventListener(_this2.stripeElementButton, 'click', function (event) {

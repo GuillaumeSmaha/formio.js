@@ -36,15 +36,21 @@ export class StripeComponent extends FormioComponents {
     this.setDisabled(this.element, disabled);
   }
 
-  paymentError(result) {
-    if (result) {
+  paymentDisplayError(result) {
+    if (result.error) {
       // Inform the user if there was an error
-      let stripeElementErrorBlock = that.ce('p', {
+      let stripeElementErrorBlock = this.ce('p', {
         class: "help-block"
       }, result.error.message);
-      that.stripeElementError.innerHTML = '';
-      that.stripeElementError.appendChild(stripeElementErrorBlock);
+      this.stripeElementError.innerHTML = '';
+      this.stripeElementError.appendChild(stripeElementErrorBlock);
+    } else {
+      this.stripeElementError.innerHTML = '';
     }
+  }
+
+  paymentError(result) {
+    this.paymentDisplayError(result);
     this.removeClass(this.element, 'stripe-submitting');
     this.addClass(this.element, 'stripe-submit-error');
     this.removeClass(this.element, 'stripe-submitted');
@@ -64,7 +70,7 @@ export class StripeComponent extends FormioComponents {
 
   paymentDone(result) {
     // Store token in hidden input
-    that.inputHiddenComponent.setValue(result.token.id);
+    this.inputHiddenComponent.setValue(result.token.id);
 
     this.removeClass(this.element, 'stripe-submit-error');
     this.removeClass(this.element, 'stripe-submitting');
@@ -150,17 +156,7 @@ export class StripeComponent extends FormioComponents {
       card.mount(this.stripeElementCard);
 
       // Handle real-time validation errors from the card Element.
-      this.addEventListener(card, 'change', (event) => {
-        if (event.error) {
-          let stripeElementErrorBlock = this.ce('p', {
-            class: "help-block"
-          }, event.error.message);
-          this.stripeElementError.innerHTML = '';
-          this.stripeElementError.appendChild(stripeElementErrorBlock);
-        } else {
-          this.stripeElementError.innerHTML = '';
-        }
-      });
+      this.addEventListener(card, 'change', this.paymentDisplayError);
 
       // Handle button submission
       this.addEventListener(this.stripeElementButton, 'click', (event) => {
