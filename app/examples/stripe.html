@@ -4,6 +4,7 @@
             <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
             <link rel="stylesheet" type="text/css" href="../../dist/formio.full.css" />
             <script type="application/javascript" src="../../dist/formio.full.js"></script>
+            <script type="application/javascript" src="../../dist/formio.contrib.js"></script>
             <style type="text/css">
             .StripeElement {
               padding: 10px 12px;
@@ -124,7 +125,7 @@ var formApp = {
                   "pattern": "",
                   "maxLength": "",
                   "minLength": "",
-                  "required": true
+                  "required": false
                 },
                 "type": "email",
                 "persistent": true,
@@ -304,6 +305,9 @@ var formApp = {
         "clearOnHide": true,
         "tags": []
       },
+
+
+
       {
         "conditional": {
           "eq": "",
@@ -311,7 +315,7 @@ var formApp = {
           "show": ""
         },
         "type": "content",
-        "html": "<h2>Stripe with auto-submission</h2>\n",
+        "html": "<h2>Stripe not required</h2>\n",
         "input": false
       },
       {
@@ -354,117 +358,13 @@ var formApp = {
               }
             }
           },
-          "componentsMapping": {
-            "name": "firstName",
-            "address_line1": "address_line1",
-            "address_city": "address_city",
-            "address_country": "address_country",
+          "cardData": {
+            "name": "{{ data.firstName }}",
+            "address_line1": "{{ data.address_line1 }}",
+            "address_city": "{{ data.address_city }}",
+            "address_country": "{{ data.address_country }}",
           }
         },
-        "components": [
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Address",
-            "key": "address_line1",
-            "label": "Address",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "City",
-            "key": "address_city",
-            "label": "City",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Country",
-            "key": "address_country",
-            "label": "Country",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          }
-        ],
         "tableView": true,
         "input": true,
         "hidden": false,
@@ -472,6 +372,9 @@ var formApp = {
         "tags": [],
         "tabindex": "1"
       },
+
+
+
       {
         "conditional": {
           "eq": "",
@@ -479,7 +382,7 @@ var formApp = {
           "show": ""
         },
         "type": "content",
-        "html": "<h2>Stripe without auto-submission</h2>\n",
+        "html": "<h2>Stripe with button</h2>\n",
         "input": false
       },
       {
@@ -495,7 +398,7 @@ var formApp = {
             "pattern": "",
             "maxLength": "",
             "minLength": "",
-            "required": true
+            "required": false
         },
         "persistent": true,
         "unique": false,
@@ -506,7 +409,7 @@ var formApp = {
         "prefix": "",
         "key": "creditCard_2",
         "label": "CreditCard 2",
-        "action": "button",
+        "action": "submit",
         "inputMask": "",
         "inputType": "text",
         "stripe": {
@@ -522,117 +425,100 @@ var formApp = {
               }
             }
           },
-          "componentsMapping": {
-            "name": "firstName",
-            "address_line1": "address_line1_2",
-            "address_city": "address_city_2",
-            "address_country": "address_country_2",
+          "cardData": {
+            "name": "{{ data.firstName }}",
+            "address_line1": "{{ data.address_line1 }}",
+            "address_city": "{{ data.address_city }}",
+            "address_country": "{{ data.address_country }}",
           }
         },
-        "components": [
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Address",
-            "key": "address_line1_2",
-            "label": "Address",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
+        "tableView": true,
+        "input": true,
+        "hidden": false,
+        "clearOnHide": true,
+        "tags": [],
+        "tabindex": "1"
+      },
+      {
+        "type": "button",
+        "theme": "primary",
+        "action": "custom",
+        "custom": "form.getComponent('creditCard_2').authorize().then(function() {form.getComponent('creditCard_2_button').disabled = true;});",
+        "block": false,
+        "rightIcon": "",
+        "leftIcon": "",
+        "size": "md",
+        "key": "creditCard_2_button",
+        "tableView": false,
+        "label": "Authorize",
+        "input": true,
+        "tags": [],
+        "conditional": {
+          "show": "",
+          "when": null,
+          "eq": ""
+        },
+        "tabindex": "6"
+      },
+
+
+      {
+        "conditional": {
+          "eq": "",
+          "when": null,
+          "show": ""
+        },
+        "type": "content",
+        "html": "<h2>Stripe required</h2>\n",
+        "input": false
+      },
+      {
+        "type": "stripe",
+        "conditional": {
+            "eq": "",
+            "when": null,
+            "show": ""
+        },
+        "validate": {
+            "customPrivate": false,
+            "custom": "",
+            "pattern": "",
+            "maxLength": "",
+            "minLength": "",
+            "required":true
+        },
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "defaultValue": "",
+        "multiple": false,
+        "suffix": "",
+        "prefix": "",
+        "key": "creditCard_3",
+        "label": "CreditCard 3",
+        "action": "button",
+        "inputMask": "",
+        "inputType": "text",
+        "stripe": {
+          "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
+          "payButton": {
+            "enable": true,
+            "paymentRequest": {
+              "country": 'CA',
+              "currency": 'cad',
+              "total": {
+                "label": 'Test payment 3',
+                "amount": 3000,
+              }
+            }
           },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "City",
-            "key": "address_city_2",
-            "label": "City",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Country",
-            "key": "address_country_2",
-            "label": "Country",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
+          "cardData": {
+            "name": "{{ data.firstName }}",
+            "address_line1": "{{ data.address_line1_2 }}",
+            "address_city": "{{ data.address_city_2 }}",
+            "address_country": "{{ data.address_country_2 }}",
           }
-        ],
+        },
         "tableView": true,
         "input": true,
         "hidden": false,
@@ -713,6 +599,59 @@ var formApp = {
     "type": "form"
   };
 
+
+formApp.components = [
+    {
+      type: 'textfield',
+      label: 'First name',
+      placeholder: 'Enter the first name.',
+      key: 'firstName',
+      input: true,
+      inputType: 'text'
+    },
+    {
+      type: 'textfield',
+      label: 'Last name',
+      placeholder: 'Enter the last name.',
+      key: 'lastName',
+      input: true,
+      inputType: 'text'
+    },
+    {
+      type: 'stripe',
+      key: 'card',
+      label: 'Credit card',
+      validate: {
+        required: true
+      },
+      stripe: {
+        apiKey: 'pk_test_Aprek1cboUExxK6dHoBaOphh',
+        cardData: {
+          name: '{{ data.firstName }} {{ data.lastName }}'
+        },
+        payButton: {
+          enable: true,
+          paymentRequest: {
+            currency: 'cad',
+            country: 'CA',
+            total: {
+              label: 'T-Shirt',
+              amount: 3000,
+            }
+          }
+        }
+      },
+    },
+    {
+      type: 'button',
+      action: 'submit',
+      label: 'Submit',
+      theme: 'primary',
+      key: 'submit'
+    }
+  ];
+
+Formio.registerComponent('stripe', Formio.contrib.stripe.stripe);
 Formio.createForm(document.getElementById('formio'), formApp).then(function(form) {
 // Defaults are provided as follows.
 form.submission = {
@@ -731,8 +670,129 @@ console.log('Submission was made!', submission);
 form.on('change', function(changed) {
 console.log('Form was changed', changed);
 });
+window.formform = form;
 });
+
+
+
+
+
+
+
+// "components": [
+//           {
+//             "type": "textfield",
+//             "conditional": {
+//               "eq": "",
+//               "when": null,
+//               "show": ""
+//             },
+//             "validate": {
+//               "customPrivate": false,
+//               "custom": "",
+//               "pattern": "",
+//               "maxLength": "",
+//               "minLength": "",
+//               "required": false
+//             },
+//             "persistent": true,
+//             "unique": false,
+//             "protected": false,
+//             "defaultValue": "",
+//             "multiple": false,
+//             "suffix": "",
+//             "prefix": "",
+//             "placeholder": "Address",
+//             "key": "address_line1_2",
+//             "label": "Address",
+//             "inputMask": "",
+//             "inputType": "text",
+//             "tableView": true,
+//             "input": true,
+//             "hidden": false,
+//             "clearOnHide": true,
+//             "tags": [],
+//             "tabindex": "1"
+//           },
+//           {
+//             "type": "textfield",
+//             "conditional": {
+//               "eq": "",
+//               "when": null,
+//               "show": ""
+//             },
+//             "validate": {
+//               "customPrivate": false,
+//               "custom": "",
+//               "pattern": "",
+//               "maxLength": "",
+//               "minLength": "",
+//               "required": false
+//             },
+//             "persistent": true,
+//             "unique": false,
+//             "protected": false,
+//             "defaultValue": "",
+//             "multiple": false,
+//             "suffix": "",
+//             "prefix": "",
+//             "placeholder": "City",
+//             "key": "address_city_2",
+//             "label": "City",
+//             "inputMask": "",
+//             "inputType": "text",
+//             "tableView": true,
+//             "input": true,
+//             "hidden": false,
+//             "clearOnHide": true,
+//             "tags": [],
+//             "tabindex": "1"
+//           },
+//           {
+//             "type": "textfield",
+//             "conditional": {
+//               "eq": "",
+//               "when": null,
+//               "show": ""
+//             },
+//             "validate": {
+//               "customPrivate": false,
+//               "custom": "",
+//               "pattern": "",
+//               "maxLength": "",
+//               "minLength": "",
+//               "required": false
+//             },
+//             "persistent": true,
+//             "unique": false,
+//             "protected": false,
+//             "defaultValue": "",
+//             "multiple": false,
+//             "suffix": "",
+//             "prefix": "",
+//             "placeholder": "Country",
+//             "key": "address_country_2",
+//             "label": "Country",
+//             "inputMask": "",
+//             "inputType": "text",
+//             "tableView": true,
+//             "input": true,
+//             "hidden": false,
+//             "clearOnHide": true,
+//             "tags": [],
+//             "tabindex": "1"
+//           }
+//         ],
+
+
+
+
+
     </script>
 </body>
 
   </html>
+
+
+
+

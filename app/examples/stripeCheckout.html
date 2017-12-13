@@ -343,11 +343,10 @@ var formApp = {
         "inputType": "text",
         "stripe": {
           "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
-          "configuration": {
-            "image": 'https://stripe.com/img/documentation/checkout/marketplace.png',
-            "locale": 'auto'
+          "handlerConfiguration": {
+            "image": 'https://cdn1.iconfinder.com/data/icons/metro-ui-dock-icon-set--icons-by-dakirby/128/Windows_Marketplace.png'
           },
-          "configurationOpen": {
+          "popupConfiguration": {
             "name": 'Demo Site Form.io',
             "description": '2 widgets',
             "currency": 'cad',
@@ -396,17 +395,15 @@ var formApp = {
         "key": "creditCardButton_2",
         "label": "CreditCardButton_2",
         "action": "submit",
-        "disableOnInvalid": true,
         "theme": "primary",
         "inputMask": "",
         "inputType": "text",
         "stripe": {
           "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
-          "configuration": {
-            "image": 'https://stripe.com/img/documentation/checkout/marketplace.png',
-            "locale": 'auto'
+          "handlerConfiguration": {
+            "image": 'https://stripe.com/img/documentation/checkout/marketplace.png'
           },
-          "configurationOpen": {
+          "popupConfiguration": {
             "name": 'Demo Site Form.io with submission',
             "description": '2 widgets',
             "currency": 'cad',
@@ -433,7 +430,6 @@ var formApp = {
       {
         "type": "button",
         "theme": "primary",
-        "disableOnInvalid": true,
         "action": "submit",
         "block": false,
         "rightIcon": "",
@@ -503,6 +499,7 @@ var formApp = {
     "type": "form"
   };
 
+Formio.registerComponent('stripeCheckout', Formio.contrib.stripeCheckout);
 Formio.createForm(document.getElementById('formio'), formApp).then(function(form) {
 // Defaults are provided as follows.
 form.submission = {
@@ -521,6 +518,7 @@ console.log('Submission was made!', submission);
 form.on('change', function(changed) {
 console.log('Form was changed', changed);
 });
+window.formform = form;
 });
     </script>
 </body>

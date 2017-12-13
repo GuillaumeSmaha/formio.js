@@ -11,14 +11,17 @@ export const component = {
   "persistent": true,
   "action": "button",
   "stripe": {
-    "keyId": "",
+    "apiKey": "",
     "payButton": {
       "enable": false,
+      "separatorLabel": "Or",
       "paymentRequest": {},
       "stripeOptions": {}
     },
-    "fields": ["name", "adress_line1", "address_city", "address_state", "address_country"],
-    "stripeOptions": {}
+    "componentsMapping": {},
+    "successLabel": "Payment successful",
+    "stripeElementsOptions": {},
+    "stripeElementOptions": {}
   },
   "validate": {
     "required": true

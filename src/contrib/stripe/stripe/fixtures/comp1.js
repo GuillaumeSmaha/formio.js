@@ -2,7 +2,7 @@ export const component = {
   "input": true,
   "tableView": true,
   "label": "stripe",
-  "key": "stripeCheckout",
+  "key": "stripe",
   "placeholder": "",
   "multiple": false,
   "protected": false,
@@ -12,11 +12,19 @@ export const component = {
   "action": "button",
   "stripe": {
     "apiKey": "",
-    "configuration": {},
-    "configurationOpen": {}
+    "payButton": {
+      "enable": false,
+      "separatorLabel": "Or",
+      "paymentRequest": {},
+      "stripeOptions": {}
+    },
+    "componentsMapping": {},
+    "successLabel": "Payment successful",
+    "stripeElementsOptions": {},
+    "stripeElementOptions": {}
   },
   "validate": {
-    "required": false
+    "required": true
   },
   "type": "stripe",
   "tags": [
