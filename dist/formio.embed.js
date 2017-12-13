@@ -9344,7 +9344,7 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
     }
   }, {
     key: 'onClickButton',
-    value: function onClickButton(event) {
+    value: function onClickButton(value) {
       // Open Checkout with further options:
       var configurationOpen = this.component.stripe.configurationOpen || {};
 

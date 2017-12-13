@@ -23,7 +23,7 @@ export class StripeCheckoutComponent extends ButtonComponent {
     }
   }
 
-  onClickButton(event) {
+  onClickButton(value) {
     // Open Checkout with further options:
     let configurationOpen = this.component.stripe.configurationOpen || {};
 
