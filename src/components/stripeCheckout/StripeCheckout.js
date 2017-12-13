@@ -15,6 +15,9 @@ export class StripeCheckoutComponent extends ButtonComponent {
 
     // Keep action
     this.componentAction = this.component.action;
+
+    // Force button to handle event action to build button
+    this.component.action = "event";
     window.cccc=this;
   }
 
@@ -42,14 +45,9 @@ export class StripeCheckoutComponent extends ButtonComponent {
   }
 
   build() {
-    // Force button to handle event action to build button
-    this.component.action = "event";
 
     // Build button
     super.build();
-
-    // Restore action
-    this.component.action = this.componentAction;
 
     // Add a hidden input which will contain the payment token.
     this.inputHidden = _cloneDeep(this.component);
