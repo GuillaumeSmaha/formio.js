@@ -9354,7 +9354,8 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
     key: 'onClickButton',
     value: function onClickButton(value) {
       // Open Checkout with further options:
-      var configurationOpen = this.component.stripe.configurationOpen || {};
+      var configurationOpen = value.component.stripe.configurationOpen || {};
+      console.log(configurationOpen);
 
       if (this.componentAction === 'submit') {
         // In case of submit, validate the form before opening button

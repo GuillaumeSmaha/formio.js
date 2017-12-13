@@ -33,7 +33,8 @@ export class StripeCheckoutComponent extends ButtonComponent {
 
   onClickButton(value) {
     // Open Checkout with further options:
-    let configurationOpen = this.component.stripe.configurationOpen || {};
+    let configurationOpen = value.component.stripe.configurationOpen || {};
+    console.log(configurationOpen);
 
     if (this.componentAction === 'submit') {
       // In case of submit, validate the form before opening button
