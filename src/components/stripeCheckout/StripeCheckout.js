@@ -3,10 +3,7 @@ import _isArray from 'lodash/isArray';
 import _cloneDeep from 'lodash/cloneDeep';
 import _each from 'lodash/each';
 import { BaseComponent } from '../base/Base';
-import { FormioComponents } from '../Components';
-import { TextFieldComponent } from '../textfield/TextField';
 import { ButtonComponent } from '../button/Button';
-import { HiddenComponent } from '../button/Hidden';
 
 export class StripeCheckoutComponent extends ButtonComponent {
   constructor(component, options, data) {
