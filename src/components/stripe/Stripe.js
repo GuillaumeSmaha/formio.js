@@ -13,6 +13,7 @@ export class StripeComponent extends FormioComponents {
     // Get the source for Stripe API
     let src = 'https://js.stripe.com/v3/';
     this.stripeReady = BaseComponent.requireLibrary('stripe', 'Stripe', src, true);
+    window.aaaa=this;
   }
 
   /**
@@ -36,6 +37,17 @@ export class StripeComponent extends FormioComponents {
     this.setDisabled(this.element, disabled);
   }
 
+  paymentPending() {
+    this.inputHiddenComponent.setValue("");
+
+    this.addClass(this.element, 'stripe-submitting');
+    this.removeClass(this.element, 'stripe-error');
+    this.removeClass(this.element, 'stripe-submitted');
+    this.stripeElementButton.setAttribute('disabled', 'disabled');
+    this.loading = true;
+    this.disabled = true;
+  }
+
   paymentDisplayError(result) {
     if (result.error) {
       // Inform the user if there was an error
@@ -54,20 +66,9 @@ export class StripeComponent extends FormioComponents {
     this.removeClass(this.element, 'stripe-submitting');
     this.addClass(this.element, 'stripe-submit-error');
     this.removeClass(this.element, 'stripe-submitted');
+    this.stripeElementButton.removeAttribute('disabled');
     this.loading = false;
     this.disabled = false;
-    this.stripeElementButton.removeAttribute('disabled');
-  }
-
-  paymentPending() {
-    this.inputHiddenComponent.setValue("");
-
-    this.addClass(this.element, 'stripe-submitting');
-    this.removeClass(this.element, 'stripe-error');
-    this.removeClass(this.element, 'stripe-submitted');
-    // this.stripeElementButton.setAttribute('disabled', 'disabled');
-    this.loading = true;
-    this.disabled = true;
   }
 
   paymentDone(result) {
@@ -81,10 +82,14 @@ export class StripeComponent extends FormioComponents {
     if (this.component.action === 'submit') {
       this.emit('submitButton');
       this.disabled = false;
-      // this.stripeElementButton.removeAttribute('disabled');
+      this.stripeElementButton.removeAttribute('disabled');
     }
     else {
       this.disabled = true;
+      if (this.stripeElementPayButton) {
+        this.stripeElementPayButton.style.display = "none";
+      }
+      this.stripeElementCard.style.display = "none";
     }
   }
 
@@ -139,7 +144,6 @@ export class StripeComponent extends FormioComponents {
     this.fieldset.appendChild(this.stripeElementButton);
 
     this.element.appendChild(this.fieldset);
-    window.aaaa=this;
 
     this.stripeReady.then(() => {
       let stripe = new Stripe(this.component.stripe.keyId)

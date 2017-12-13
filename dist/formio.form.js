@@ -9017,6 +9017,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
 
     var src = 'https://js.stripe.com/v3/';
     _this.stripeReady = _Base.BaseComponent.requireLibrary('stripe', 'Stripe', src, true);
+    window.aaaa = _this;
     return _this;
   }
 
@@ -9033,6 +9034,18 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
     key: 'setValue',
     value: function setValue(value, flags) {
       return _Base.BaseComponent.prototype.setValue.apply(this, arguments);
+    }
+  }, {
+    key: 'paymentPending',
+    value: function paymentPending() {
+      this.inputHiddenComponent.setValue("");
+
+      this.addClass(this.element, 'stripe-submitting');
+      this.removeClass(this.element, 'stripe-error');
+      this.removeClass(this.element, 'stripe-submitted');
+      this.stripeElementButton.setAttribute('disabled', 'disabled');
+      this.loading = true;
+      this.disabled = true;
     }
   }, {
     key: 'paymentDisplayError',
@@ -9055,21 +9068,9 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       this.removeClass(this.element, 'stripe-submitting');
       this.addClass(this.element, 'stripe-submit-error');
       this.removeClass(this.element, 'stripe-submitted');
+      this.stripeElementButton.removeAttribute('disabled');
       this.loading = false;
       this.disabled = false;
-      this.stripeElementButton.removeAttribute('disabled');
-    }
-  }, {
-    key: 'paymentPending',
-    value: function paymentPending() {
-      this.inputHiddenComponent.setValue("");
-
-      this.addClass(this.element, 'stripe-submitting');
-      this.removeClass(this.element, 'stripe-error');
-      this.removeClass(this.element, 'stripe-submitted');
-      // this.stripeElementButton.setAttribute('disabled', 'disabled');
-      this.loading = true;
-      this.disabled = true;
     }
   }, {
     key: 'paymentDone',
@@ -9084,9 +9085,13 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       if (this.component.action === 'submit') {
         this.emit('submitButton');
         this.disabled = false;
-        // this.stripeElementButton.removeAttribute('disabled');
+        this.stripeElementButton.removeAttribute('disabled');
       } else {
         this.disabled = true;
+        if (this.stripeElementPayButton) {
+          this.stripeElementPayButton.style.display = "none";
+        }
+        this.stripeElementCard.style.display = "none";
       }
     }
   }, {
@@ -9144,7 +9149,6 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       this.fieldset.appendChild(this.stripeElementButton);
 
       this.element.appendChild(this.fieldset);
-      window.aaaa = this;
 
       this.stripeReady.then(function () {
         var stripe = new Stripe(_this2.component.stripe.keyId);
