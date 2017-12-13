@@ -9056,6 +9056,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       this.addClass(this.element, 'stripe-submit-error');
       this.removeClass(this.element, 'stripe-submitted');
       this.loading = false;
+      this.disabled = false;
     }
   }, {
     key: 'paymentPending',
@@ -9185,7 +9186,6 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
             } else {
               _this2.paymentDone(result);
             }
-            that.stripeElementButton.removeAttribute('disabled');
           });
         });
 

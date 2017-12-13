@@ -55,6 +55,7 @@ export class StripeComponent extends FormioComponents {
     this.addClass(this.element, 'stripe-submit-error');
     this.removeClass(this.element, 'stripe-submitted');
     this.loading = false;
+    this.disabled = false;
   }
 
   paymentPending() {
@@ -180,7 +181,6 @@ export class StripeComponent extends FormioComponents {
           } else {
             this.paymentDone(result);
           }
-          that.stripeElementButton.removeAttribute('disabled');
         });
       });
 
