@@ -303,6 +303,63 @@ var formApp = {
           "show": ""
         },
         "type": "content",
+        "html": "<h2>Stripe checkout button</h2>\n",
+        "input": false
+      },
+      {
+        "type": "stripeCheckout",
+        "conditional": {
+            "eq": "",
+            "when": null,
+            "show": ""
+        },
+        "validate": {
+            "customPrivate": false,
+            "custom": "",
+            "pattern": "",
+            "maxLength": "",
+            "minLength": "",
+            "required": false
+        },
+        "persistent": true,
+        "unique": false,
+        "protected": false,
+        "defaultValue": "",
+        "multiple": false,
+        "suffix": "",
+        "prefix": "",
+        "key": "creditCardButton",
+        "label": "CreditCardButton",
+        "action": "submit",
+        "inputMask": "",
+        "inputType": "text",
+        "stripe": {
+          "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
+          "configuration": {
+            "image": 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            "locale": 'auto'
+          },
+          "configurationOpen": {
+            "name": 'Demo Site Form.io',
+            "description": '2 widgets',
+            "currency": 'cad',
+            "amount": 2000
+          }
+        },
+        "tableView": true,
+        "input": true,
+        "hidden": false,
+        "clearOnHide": true,
+        "tags": [],
+        "tabindex": "1"
+      },
+      {
+        "conditional": {
+          "eq": "",
+          "when": null,
+          "show": ""
+        },
+        "type": "content",
         "html": "<h2>Stripe with auto-submission</h2>\n",
         "input": false
       },
@@ -334,7 +391,7 @@ var formApp = {
         "inputMask": "",
         "inputType": "text",
         "stripe": {
-          "keyId": "pk_test_Aprek1cboUExxK6dHoBaOphh",
+          "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
           "payButton": {
             "enable": true,
             "paymentRequest": {
@@ -502,7 +559,7 @@ var formApp = {
         "inputMask": "",
         "inputType": "text",
         "stripe": {
-          "keyId": "pk_test_Aprek1cboUExxK6dHoBaOphh",
+          "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
           "payButton": {
             "enable": true,
             "paymentRequest": {

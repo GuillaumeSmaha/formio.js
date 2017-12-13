@@ -34,6 +34,7 @@ import { WellComponent } from './well/Well';
 import { GmapComponent } from './gmap/Gmap';
 import { FileComponent } from './file/File';
 import { StripeComponent } from './stripe/Stripe';
+import { StripeCheckoutComponent } from './stripe/StripeCheckout';
 module.exports = {
   address: AddressComponent,
   base: BaseComponent,
@@ -71,6 +72,7 @@ module.exports = {
   gmap: GmapComponent,
   file: FileComponent,
   stripe: StripeComponent,
+  stripeCheckout: StripeCheckoutComponent,
   create: function(component, options, data, nobuild) {
     let comp = null;
     if (!component.type) {

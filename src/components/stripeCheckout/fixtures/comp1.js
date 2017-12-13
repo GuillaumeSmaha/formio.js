@@ -2,7 +2,7 @@ export const component = {
   "input": true,
   "tableView": true,
   "label": "stripe",
-  "key": "stripe",
+  "key": "stripeCheckout",
   "placeholder": "",
   "multiple": false,
   "protected": false,
@@ -11,17 +11,12 @@ export const component = {
   "persistent": true,
   "action": "button",
   "stripe": {
-    "keyId": "",
-    "payButton": {
-      "enable": false,
-      "paymentRequest": {},
-      "stripeOptions": {}
-    },
-    "fields": ["name", "adress_line1", "address_city", "address_state", "address_country"],
-    "stripeOptions": {}
+    "apiKey": "",
+    "configuration": {},
+    "configurationOpen": {}
   },
   "validate": {
-    "required": true
+    "required": false
   },
   "type": "stripe",
   "tags": [

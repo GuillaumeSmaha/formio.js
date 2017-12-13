@@ -145,7 +145,7 @@ export class StripeComponent extends FormioComponents {
     this.element.appendChild(this.fieldset);
 
     this.stripeReady.then(() => {
-      let stripe = new Stripe(this.component.stripe.keyId)
+      let stripe = new Stripe(this.component.stripe.apiKey)
 
       let stripeOptions = {};
       if (this.component.stripe) {
