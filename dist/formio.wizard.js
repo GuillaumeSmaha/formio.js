@@ -9378,7 +9378,7 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       this.root.addComponent(this.inputHidden);
 
       // Get hidden input component
-      this.inputHiddenComponent = this.root.getComponent(this.component.key);
+      this.inputHiddenComponent = this.root.getComponent(this.inputHidden.key);
 
       this.stripeCheckoutReady.then(function () {
         var configuration = _this2.component.stripe.configuration || {};

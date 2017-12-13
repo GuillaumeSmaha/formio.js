@@ -56,7 +56,7 @@ export class StripeCheckoutComponent extends ButtonComponent {
     this.root.addComponent(this.inputHidden);
 
     // Get hidden input component
-    this.inputHiddenComponent = this.root.getComponent(this.component.key);
+    this.inputHiddenComponent = this.root.getComponent(this.inputHidden.key);
 
     this.stripeCheckoutReady.then(() => {
       let configuration = this.component.stripe.configuration || {};
