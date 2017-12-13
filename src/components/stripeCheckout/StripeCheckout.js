@@ -33,7 +33,7 @@ export class StripeCheckoutComponent extends ButtonComponent {
     this.root.addComponent(this.inputHidden);
 
     // Get hidden input component
-    this.inputHiddenComponent = this.getComponent(this.component.key);
+    this.inputHiddenComponent = this.root.getComponent(this.component.key);
 
     // Force button to handle event action on click
     // this.component.event = "event";
