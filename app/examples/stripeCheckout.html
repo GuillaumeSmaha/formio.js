@@ -118,6 +118,14 @@ var formApp = {
                   "when": null,
                   "show": ""
                 },
+                "validate": {
+                  "customPrivate": false,
+                  "custom": "",
+                  "pattern": "",
+                  "maxLength": "",
+                  "minLength": "",
+                  "required": true
+                },
                 "type": "email",
                 "persistent": true,
                 "unique": false,
@@ -331,6 +339,7 @@ var formApp = {
         "key": "creditCardButton",
         "label": "CreditCardButton",
         "action": "button",
+        "disableOnInvalid": true,
         "inputMask": "",
         "inputType": "text",
         "stripe": {
@@ -390,7 +399,6 @@ var formApp = {
         "action": "submit",
         "inputMask": "",
         "inputType": "text",
-        "action": "submit",
         "stripe": {
           "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
           "configuration": {

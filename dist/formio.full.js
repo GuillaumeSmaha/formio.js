@@ -9318,6 +9318,7 @@ function _inherits(subClass, superClass) {
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
+// Stripe Checkout can only have one handler for all buttons
 var StripeCheckoutHandler = void 0;
 
 var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_ButtonComponent) {
@@ -9337,7 +9338,6 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
 
     // Force button to handle event action to build button
     _this.component.action = "event";
-    window.cccc = _this;
     return _this;
   }
 
@@ -9374,6 +9374,7 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       // Build button
       _get(StripeCheckoutComponent.prototype.__proto__ || Object.getPrototypeOf(StripeCheckoutComponent.prototype), 'build', this).call(this);
 
+      // In case of submit, add event listeners
       if (this.componentAction === 'submit') {
         this.on('submitButton', function () {
           _this2.loading = true;
@@ -9401,8 +9402,8 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       // Get hidden input component
       this.inputHiddenComponent = this.root.getComponent(this.inputHidden.key);
 
+      // When stripe checkout is ready, create the handler and add event listeners
       this.stripeCheckoutReady.then(function () {
-
         if (!StripeCheckoutHandler) {
           var configuration = _this2.component.stripe.configuration || {};
           configuration.key = _this2.component.stripe.apiKey;

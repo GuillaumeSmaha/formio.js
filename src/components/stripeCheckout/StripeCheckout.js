@@ -5,6 +5,7 @@ import _each from 'lodash/each';
 import { BaseComponent } from '../base/Base';
 import { ButtonComponent } from '../button/Button';
 
+// Stripe Checkout can only have one handler for all buttons
 let StripeCheckoutHandler;
 
 export class StripeCheckoutComponent extends ButtonComponent {
@@ -20,7 +21,6 @@ export class StripeCheckoutComponent extends ButtonComponent {
 
     // Force button to handle event action to build button
     this.component.action = "event";
-    window.cccc=this;
   }
 
   onToken(token) {
@@ -48,10 +48,10 @@ export class StripeCheckoutComponent extends ButtonComponent {
   }
 
   build() {
-
     // Build button
     super.build();
 
+    // In case of submit, add event listeners
     if (this.componentAction === 'submit') {
       this.on('submitButton', () => {
         this.loading = true;
@@ -79,8 +79,8 @@ export class StripeCheckoutComponent extends ButtonComponent {
     // Get hidden input component
     this.inputHiddenComponent = this.root.getComponent(this.inputHidden.key);
 
+    // When stripe checkout is ready, create the handler and add event listeners
     this.stripeCheckoutReady.then(() => {
-
       if (!StripeCheckoutHandler) {
         let configuration = this.component.stripe.configuration || {};
         configuration.key = this.component.stripe.apiKey;
