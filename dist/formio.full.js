@@ -9318,6 +9318,8 @@ function _inherits(subClass, superClass) {
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
+var StripeCheckoutHandler = void 0;
+
 var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_ButtonComponent) {
   _inherits(StripeCheckoutComponent, _ButtonComponent);
 
@@ -9357,10 +9359,10 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       if (this.componentAction === 'submit') {
         // In case of submit, validate the form before opening button
         if (this.root.isValid(value.data, true)) {
-          this.handler.open(configurationOpen);
+          StripeCheckoutHandler.open(configurationOpen);
         }
       } else {
-        this.handler.open(configurationOpen);
+        StripeCheckoutHandler.open(configurationOpen);
       }
     }
   }, {
@@ -9381,16 +9383,19 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       this.inputHiddenComponent = this.root.getComponent(this.inputHidden.key);
 
       this.stripeCheckoutReady.then(function () {
-        var configuration = _this2.component.stripe.configuration || {};
-        configuration.key = _this2.component.stripe.apiKey;
-        configuration.token = _this2.onToken.bind(_this2);
 
-        _this2.handler = StripeCheckout.configure(configuration);
+        if (!StripeCheckoutHandler) {
+          var configuration = _this2.component.stripe.configuration || {};
+          configuration.key = _this2.component.stripe.apiKey;
+          configuration.token = _this2.onToken.bind(_this2);
+
+          StripeCheckoutHandler = StripeCheckout.configure(configuration);
+        }
 
         _this2.on('customEvent', _this2.onClickButton.bind(_this2));
 
         _this2.addEventListener(window, 'popstate', function (event) {
-          _this2.handler.close();
+          StripeCheckoutHandler.close();
         });
       });
     }

@@ -5,6 +5,8 @@ import _each from 'lodash/each';
 import { BaseComponent } from '../base/Base';
 import { ButtonComponent } from '../button/Button';
 
+let StripeCheckoutHandler;
+
 export class StripeCheckoutComponent extends ButtonComponent {
   constructor(component, options, data) {
     super(component, options, data);
@@ -36,11 +38,11 @@ export class StripeCheckoutComponent extends ButtonComponent {
     if (this.componentAction === 'submit') {
       // In case of submit, validate the form before opening button
       if (this.root.isValid(value.data, true)) {
-        this.handler.open(configurationOpen);
+        StripeCheckoutHandler.open(configurationOpen);
       }
     }
     else {
-      this.handler.open(configurationOpen);
+      StripeCheckoutHandler.open(configurationOpen);
     }
   }
 
@@ -59,16 +61,19 @@ export class StripeCheckoutComponent extends ButtonComponent {
     this.inputHiddenComponent = this.root.getComponent(this.inputHidden.key);
 
     this.stripeCheckoutReady.then(() => {
-      let configuration = this.component.stripe.configuration || {};
-      configuration.key = this.component.stripe.apiKey;
-      configuration.token = this.onToken.bind(this);
 
-      this.handler = StripeCheckout.configure(configuration);
+      if (!StripeCheckoutHandler) {
+        let configuration = this.component.stripe.configuration || {};
+        configuration.key = this.component.stripe.apiKey;
+        configuration.token = this.onToken.bind(this);
+
+        StripeCheckoutHandler = StripeCheckout.configure(configuration);
+      }
 
       this.on('customEvent', this.onClickButton.bind(this));
 
       this.addEventListener(window, 'popstate', (event) => {
-        this.handler.close();
+        StripeCheckoutHandler.close();
       });
     });
   }
