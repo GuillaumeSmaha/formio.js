@@ -12,6 +12,9 @@ export class StripeCheckoutComponent extends ButtonComponent {
     // Get the source for Stripe API
     let src = 'https://checkout.stripe.com/checkout.js';
     this.stripeCheckoutReady = BaseComponent.requireLibrary('stripeCheckout', 'StripeCheckout', src, true);
+
+    // Keep action
+    this.componentAction = this.component.action;
     window.cccc=this;
   }
 
@@ -39,18 +42,19 @@ export class StripeCheckoutComponent extends ButtonComponent {
   }
 
   build() {
-    // Keep action
-    this.componentAction = this.component.action;
-
-    // Force button to handle event action on click
+    // Force button to handle event action to build button
     this.component.action = "event";
 
     // Build button
     super.build();
 
+    // Restore action
+    this.component.action = this.componentAction;
+
     // Add a hidden input which will contain the payment token.
     this.inputHidden = _cloneDeep(this.component);
     this.inputHidden.type = "hidden";
+    this.inputHidden.key += "_token";
     this.root.addComponent(this.inputHidden);
 
     // Get hidden input component

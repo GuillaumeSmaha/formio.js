@@ -9329,6 +9329,9 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
 
     var src = 'https://checkout.stripe.com/checkout.js';
     _this.stripeCheckoutReady = _Base.BaseComponent.requireLibrary('stripeCheckout', 'StripeCheckout', src, true);
+
+    // Keep action
+    _this.componentAction = _this.component.action;
     window.cccc = _this;
     return _this;
   }
@@ -9362,18 +9365,19 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
     value: function build() {
       var _this2 = this;
 
-      // Keep action
-      this.componentAction = this.component.action;
-
-      // Force button to handle event action on click
+      // Force button to handle event action to build button
       this.component.action = "event";
 
       // Build button
       _get(StripeCheckoutComponent.prototype.__proto__ || Object.getPrototypeOf(StripeCheckoutComponent.prototype), 'build', this).call(this);
 
+      // Restore action
+      this.component.action = this.componentAction;
+
       // Add a hidden input which will contain the payment token.
       this.inputHidden = (0, _cloneDeep3.default)(this.component);
       this.inputHidden.type = "hidden";
+      this.inputHidden.key += "_token";
       this.root.addComponent(this.inputHidden);
 
       // Get hidden input component
