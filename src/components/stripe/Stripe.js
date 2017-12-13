@@ -71,7 +71,7 @@ export class StripeComponent extends FormioComponents {
     this.disabled = false;
   }
 
-  paymentDone(result) {
+  paymentDone(result, payButton) {
     // Store token in hidden input
     this.inputHiddenComponent.setValue(result.token.id);
 
@@ -79,17 +79,16 @@ export class StripeComponent extends FormioComponents {
     this.removeClass(this.element, 'stripe-submitting');
     this.addClass(this.element, 'stripe-submitted');
     this.loading = false;
+    this.disabled = true;
+
+    if (this.stripeElementPayButton) {
+      this.stripeElementPayButton.style.display = "none";
+    }
+    this.stripeElementCard.style.display = "none";
+    this.stripeElementButton.setAttribute('disabled', 'disabled');
+
     if (this.component.action === 'submit') {
       this.emit('submitButton');
-      this.disabled = false;
-      this.stripeElementButton.removeAttribute('disabled');
-    }
-    else {
-      this.disabled = true;
-      if (this.stripeElementPayButton) {
-        this.stripeElementPayButton.style.display = "none";
-      }
-      this.stripeElementCard.style.display = "none";
     }
   }
 
@@ -194,7 +193,7 @@ export class StripeComponent extends FormioComponents {
         let paymentRequest = stripe.paymentRequest(this.component.stripe.payButton.paymentRequest);
 
         this.addEventListener(paymentRequest, 'token', (result) => {
-          this.paymentDone(result);
+          this.paymentDone(result, true);
           result.complete("success");
         });
 

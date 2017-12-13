@@ -9074,7 +9074,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
     }
   }, {
     key: 'paymentDone',
-    value: function paymentDone(result) {
+    value: function paymentDone(result, payButton) {
       // Store token in hidden input
       this.inputHiddenComponent.setValue(result.token.id);
 
@@ -9082,16 +9082,16 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       this.removeClass(this.element, 'stripe-submitting');
       this.addClass(this.element, 'stripe-submitted');
       this.loading = false;
+      this.disabled = true;
+
+      if (this.stripeElementPayButton) {
+        this.stripeElementPayButton.style.display = "none";
+      }
+      this.stripeElementCard.style.display = "none";
+      this.stripeElementButton.setAttribute('disabled', 'disabled');
+
       if (this.component.action === 'submit') {
         this.emit('submitButton');
-        this.disabled = false;
-        this.stripeElementButton.removeAttribute('disabled');
-      } else {
-        this.disabled = true;
-        if (this.stripeElementPayButton) {
-          this.stripeElementPayButton.style.display = "none";
-        }
-        this.stripeElementCard.style.display = "none";
       }
     }
   }, {
@@ -9199,7 +9199,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
           var paymentRequest = stripe.paymentRequest(_this2.component.stripe.payButton.paymentRequest);
 
           _this2.addEventListener(paymentRequest, 'token', function (result) {
-            _this2.paymentDone(result);
+            _this2.paymentDone(result, true);
             result.complete("success");
           });
 
