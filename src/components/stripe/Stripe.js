@@ -36,7 +36,15 @@ export class StripeComponent extends FormioComponents {
     this.setDisabled(this.element, disabled);
   }
 
-  paymentError() {
+  paymentError(result) {
+    if (result) {
+      // Inform the user if there was an error
+      let stripeElementErrorBlock = that.ce('p', {
+        class: "help-block"
+      }, result.error.message);
+      that.stripeElementError.innerHTML = '';
+      that.stripeElementError.appendChild(stripeElementErrorBlock);
+    }
     this.removeClass(this.element, 'stripe-submitting');
     this.addClass(this.element, 'stripe-submit-error');
     this.removeClass(this.element, 'stripe-submitted');
@@ -44,14 +52,20 @@ export class StripeComponent extends FormioComponents {
   }
 
   paymentPending() {
+    this.inputHiddenComponent.setValue("");
+
     this.addClass(this.element, 'stripe-submitting');
     this.removeClass(this.element, 'stripe-error');
     this.removeClass(this.element, 'stripe-submitted');
+    // this.stripeElementButton.setAttribute('disabled', 'disabled');
     this.loading = true;
     this.disabled = true;
   }
 
-  paymentDone() {
+  paymentDone(result) {
+    // Store token in hidden input
+    that.inputHiddenComponent.setValue(result.token.id);
+
     this.removeClass(this.element, 'stripe-submit-error');
     this.removeClass(this.element, 'stripe-submitting');
     this.addClass(this.element, 'stripe-submitted');
@@ -152,8 +166,6 @@ export class StripeComponent extends FormioComponents {
       this.addEventListener(this.stripeElementButton, 'click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        this.inputHiddenComponent.setValue("");
-        this.stripeElementButton.setAttribute('disabled', 'disabled');
         this.paymentPending();
 
         let cardData = {};
@@ -168,16 +180,9 @@ export class StripeComponent extends FormioComponents {
         let that = this;
         stripe.createToken(card, cardData).then((result) => {
           if (result.error) {
-            // Inform the user if there was an error
-            let stripeElementErrorBlock = that.ce('p', {
-              class: "help-block"
-            }, result.error.message);
-            that.stripeElementError.innerHTML = '';
-            that.stripeElementError.appendChild(stripeElementErrorBlock);
+            this.paymentError(result);
           } else {
-            // Store token in hidden input
-            that.inputHiddenComponent.setValue(result.token.id);
-            this.paymentDone();
+            this.paymentDone(result);
           }
           that.stripeElementButton.removeAttribute('disabled');
         });
@@ -187,9 +192,7 @@ export class StripeComponent extends FormioComponents {
         let paymentRequest = stripe.paymentRequest(this.component.stripe.payButton.paymentRequest);
 
         this.addEventListener(paymentRequest, 'token', (result) => {
-          // Store token in hidden input
-          this.inputHiddenComponent.setValue(result.token.id);
-          this.paymentDone();
+          this.paymentDone(result);
           result.complete("success");
         });
 
