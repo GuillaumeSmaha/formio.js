@@ -9337,20 +9337,38 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
     key: 'onToken',
     value: function onToken(token) {
       this.inputHiddenComponent.setValue(token.id);
+      // In case of submit, submit the form
+      if (this.componentAction === 'submit') {
+        this.emit('submitButton');
+      }
     }
   }, {
     key: 'onClickButton',
     value: function onClickButton(event) {
-      event.preventDefault();
       // Open Checkout with further options:
       var configurationOpen = this.component.stripe.configurationOpen || {};
-      this.handler.open(configurationOpen);
+
+      if (this.componentAction === 'submit') {
+        // In case of submit, validate the form before opening button
+        if (this.root.isValid(value.data, true)) {
+          this.handler.open(configurationOpen);
+        }
+      } else {
+        this.handler.open(configurationOpen);
+      }
     }
   }, {
     key: 'build',
     value: function build() {
       var _this2 = this;
 
+      // Keep action
+      this.componentAction = this.component.action;
+
+      // Force button to handle event action on click
+      this.component.action = "event";
+
+      // Build button
       _get(StripeCheckoutComponent.prototype.__proto__ || Object.getPrototypeOf(StripeCheckoutComponent.prototype), 'build', this).call(this);
 
       // Add a hidden input which will contain the payment token.
@@ -9361,17 +9379,14 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       // Get hidden input component
       this.inputHiddenComponent = this.root.getComponent(this.component.key);
 
-      // Force button to handle event action on click
-      // this.component.event = "event";
-
       this.stripeCheckoutReady.then(function () {
         var configuration = _this2.component.stripe.configuration || {};
-        configuration.apiKey = _this2.component.stripe.apiKey;
-        configuration.token = _this2.onToken;
+        configuration.key = _this2.component.stripe.apiKey;
+        configuration.token = _this2.onToken.bind(_this2);
 
         _this2.handler = StripeCheckout.configure(configuration);
 
-        _this2.on('customEvent', _this2.onClickButton);
+        _this2.on('customEvent', _this2.onClickButton.bind(_this2));
 
         _this2.addEventListener(window, 'popstate', function (event) {
           _this2.handler.close();

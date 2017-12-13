@@ -303,11 +303,11 @@ var formApp = {
           "show": ""
         },
         "type": "content",
-        "html": "<h2>Stripe with auto-submission</h2>\n",
+        "html": "<h2>Stripe checkout button</h2>\n",
         "input": false
       },
       {
-        "type": "stripe",
+        "type": "stripeCheckout",
         "conditional": {
             "eq": "",
             "when": null,
@@ -328,135 +328,24 @@ var formApp = {
         "multiple": false,
         "suffix": "",
         "prefix": "",
-        "key": "creditCard",
-        "label": "CreditCard",
+        "key": "creditCardButton",
+        "label": "CreditCardButton",
         "action": "submit",
         "inputMask": "",
         "inputType": "text",
         "stripe": {
           "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
-          "payButton": {
-            "enable": true,
-            "paymentRequest": {
-              "country": 'CA',
-              "currency": 'cad',
-              "total": {
-                "label": 'Test payment',
-                "amount": 1000,
-              }
-            }
+          "configuration": {
+            "image": 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            "locale": 'auto'
           },
-          "componentsMapping": {
-            "name": "firstName",
-            "address_line1": "address_line1",
-            "address_city": "address_city",
-            "address_country": "address_country",
+          "configurationOpen": {
+            "name": 'Demo Site Form.io',
+            "description": '2 widgets',
+            "currency": 'cad',
+            "amount": 2000
           }
         },
-        "components": [
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Address",
-            "key": "address_line1",
-            "label": "Address",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "City",
-            "key": "address_city",
-            "label": "City",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Country",
-            "key": "address_country",
-            "label": "Country",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          }
-        ],
         "tableView": true,
         "input": true,
         "hidden": false,
@@ -471,11 +360,11 @@ var formApp = {
           "show": ""
         },
         "type": "content",
-        "html": "<h2>Stripe without auto-submission</h2>\n",
+        "html": "<h2>Stripe checkout button with submission</h2>\n",
         "input": false
       },
       {
-        "type": "stripe",
+        "type": "stripeCheckout",
         "conditional": {
             "eq": "",
             "when": null,
@@ -487,7 +376,7 @@ var formApp = {
             "pattern": "",
             "maxLength": "",
             "minLength": "",
-            "required": true
+            "required": false
         },
         "persistent": true,
         "unique": false,
@@ -496,135 +385,25 @@ var formApp = {
         "multiple": false,
         "suffix": "",
         "prefix": "",
-        "key": "creditCard_2",
-        "label": "CreditCard 2",
-        "action": "button",
+        "key": "creditCardButton",
+        "label": "CreditCardButton",
+        "action": "submit",
         "inputMask": "",
         "inputType": "text",
+        "action": "submit",
         "stripe": {
           "apiKey": "pk_test_Aprek1cboUExxK6dHoBaOphh",
-          "payButton": {
-            "enable": true,
-            "paymentRequest": {
-              "country": 'CA',
-              "currency": 'cad',
-              "total": {
-                "label": 'Test payment',
-                "amount": 2000,
-              }
-            }
+          "configuration": {
+            "image": 'https://stripe.com/img/documentation/checkout/marketplace.png',
+            "locale": 'auto'
           },
-          "componentsMapping": {
-            "name": "firstName",
-            "address_line1": "address_line1_2",
-            "address_city": "address_city_2",
-            "address_country": "address_country_2",
+          "configurationOpen": {
+            "name": 'Demo Site Form.io with submission',
+            "description": '2 widgets',
+            "currency": 'cad',
+            "amount": 2000
           }
         },
-        "components": [
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Address",
-            "key": "address_line1_2",
-            "label": "Address",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "City",
-            "key": "address_city_2",
-            "label": "City",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          },
-          {
-            "type": "textfield",
-            "conditional": {
-              "eq": "",
-              "when": null,
-              "show": ""
-            },
-            "validate": {
-              "customPrivate": false,
-              "custom": "",
-              "pattern": "",
-              "maxLength": "",
-              "minLength": "",
-              "required": false
-            },
-            "persistent": true,
-            "unique": false,
-            "protected": false,
-            "defaultValue": "",
-            "multiple": false,
-            "suffix": "",
-            "prefix": "",
-            "placeholder": "Country",
-            "key": "address_country_2",
-            "label": "Country",
-            "inputMask": "",
-            "inputType": "text",
-            "tableView": true,
-            "input": true,
-            "hidden": false,
-            "clearOnHide": true,
-            "tags": [],
-            "tabindex": "1"
-          }
-        ],
         "tableView": true,
         "input": true,
         "hidden": false,
