@@ -14,13 +14,7 @@ export const component = {
     "payButton": {
       "enable": false,
       "paymentRequest": {},
-      "stripeOptions": {
-        style: {
-          paymentRequestButton: {
-            theme: "light"
-          }
-        }
-      }
+      "stripeOptions": {}
     },
     "fields": ["name", "adress_line1", "address_city", "address_state", "address_country"],
     "stripeOptions": {}
