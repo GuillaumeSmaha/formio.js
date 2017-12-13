@@ -56,6 +56,7 @@ export class StripeComponent extends FormioComponents {
     this.removeClass(this.element, 'stripe-submitted');
     this.loading = false;
     this.disabled = false;
+    this.stripeElementButton.removeAttribute('disabled');
   }
 
   paymentPending() {
@@ -80,6 +81,7 @@ export class StripeComponent extends FormioComponents {
     if (this.component.action === 'submit') {
       this.emit('submitButton');
       this.disabled = false;
+      // this.stripeElementButton.removeAttribute('disabled');
     }
     else {
       this.disabled = true;
@@ -157,7 +159,7 @@ export class StripeComponent extends FormioComponents {
       card.mount(this.stripeElementCard);
 
       // Handle real-time validation errors from the card Element.
-      this.addEventListener(card, 'change', this.paymentDisplayError);
+      this.addEventListener(card, 'change', this.paymentDisplayError.bind(this));
 
       // Handle button submission
       this.addEventListener(this.stripeElementButton, 'click', (event) => {

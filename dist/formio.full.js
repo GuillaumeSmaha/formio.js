@@ -9057,6 +9057,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       this.removeClass(this.element, 'stripe-submitted');
       this.loading = false;
       this.disabled = false;
+      this.stripeElementButton.removeAttribute('disabled');
     }
   }, {
     key: 'paymentPending',
@@ -9083,6 +9084,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
       if (this.component.action === 'submit') {
         this.emit('submitButton');
         this.disabled = false;
+        // this.stripeElementButton.removeAttribute('disabled');
       } else {
         this.disabled = true;
       }
@@ -9162,7 +9164,7 @@ var StripeComponent = exports.StripeComponent = function (_FormioComponents) {
         card.mount(_this2.stripeElementCard);
 
         // Handle real-time validation errors from the card Element.
-        _this2.addEventListener(card, 'change', _this2.paymentDisplayError);
+        _this2.addEventListener(card, 'change', _this2.paymentDisplayError.bind(_this2));
 
         // Handle button submission
         _this2.addEventListener(_this2.stripeElementButton, 'click', function (event) {
