@@ -9374,6 +9374,24 @@ var StripeCheckoutComponent = exports.StripeCheckoutComponent = function (_Butto
       // Build button
       _get(StripeCheckoutComponent.prototype.__proto__ || Object.getPrototypeOf(StripeCheckoutComponent.prototype), 'build', this).call(this);
 
+      if (this.componentAction === 'submit') {
+        this.on('submitButton', function () {
+          _this2.loading = true;
+          _this2.disabled = true;
+        }, true);
+        this.on('submitDone', function () {
+          _this2.loading = false;
+          _this2.disabled = false;
+        }, true);
+        this.on('change', function (value) {
+          _this2.loading = false;
+          _this2.disabled = _this2.component.disableOnInvalid && !_this2.root.isValid(value.data, true);
+        }, true);
+        this.on('error', function () {
+          _this2.loading = false;
+        }, true);
+      }
+
       // Add a hidden input which will contain the payment token.
       this.inputHidden = (0, _cloneDeep3.default)(this.component);
       this.inputHidden.type = "hidden";

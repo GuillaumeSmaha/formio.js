@@ -52,6 +52,24 @@ export class StripeCheckoutComponent extends ButtonComponent {
     // Build button
     super.build();
 
+    if (this.componentAction === 'submit') {
+      this.on('submitButton', () => {
+        this.loading = true;
+        this.disabled = true;
+      }, true);
+      this.on('submitDone', () => {
+        this.loading = false;
+        this.disabled = false;
+      }, true);
+      this.on('change', (value) => {
+        this.loading = false;
+        this.disabled = (this.component.disableOnInvalid && !this.root.isValid(value.data, true));
+      }, true);
+      this.on('error', () => {
+        this.loading = false;
+      }, true);
+    }
+
     // Add a hidden input which will contain the payment token.
     this.inputHidden = _cloneDeep(this.component);
     this.inputHidden.type = "hidden";
