@@ -34,7 +34,7 @@ import { WellComponent } from './well/Well';
 import { GmapComponent } from './gmap/Gmap';
 import { FileComponent } from './file/File';
 import { StripeComponent } from './stripe/Stripe';
-import { StripeCheckoutComponent } from './stripe/StripeCheckout';
+import { StripeCheckoutComponent } from './stripeCheckout/StripeCheckout';
 module.exports = {
   address: AddressComponent,
   base: BaseComponent,
